@@ -1,11 +1,24 @@
 {
   "servers": {
+    "ui-magic": {
+      "command": "npx",
+      "args": ["-y", "@magicuidesign/mcp@latest"]
+    },
     "shadcn": {
       "command": "npx",
-      "args": [
-        "shadcn@latest",
-        "mcp"
-      ]
+      "args": ["-y", "shadcn@latest", "mcp"]
+    },
+    "prisma": {
+      "command": "npx",
+      "args": ["-y", "prisma-mcp@latest"]
+    },
+    "auth": {
+      "command": "npx",
+      "args": ["-y", "lucia-auth-mcp@latest"]
+    },
+    "supabase": {
+      "type": "http",
+      "url": "https://mcp.supabase.com/mcp"
     }
   }
 }
