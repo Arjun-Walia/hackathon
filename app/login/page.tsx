@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState, type FormEvent } from "react";
+import { Suspense, useEffect, useState, type FormEvent } from "react";
 
 import { usePageTitle } from "@/lib/hooks/use-page-title";
 import { getSupabaseBrowserClient, isSupabaseConfigured } from "@/lib/supabase/client";
@@ -12,7 +12,11 @@ const MISSING_SUPABASE_ENV_MESSAGE = "Authentication is not configured. Add NEXT
 
 type ProfileRole = "tpc_admin" | "student";
 
-async function resolveRoleAndRedirect(userId: string, router: ReturnType<typeof useRouter>) {
+async function resolveRoleAndRedirect(
+  userId: string,
+  router: ReturnType<typeof useRouter>,
+  fallbackRole?: ProfileRole,
+) {
   const supabase = getSupabaseBrowserClient();
   const { data: profile } = await supabase
     .from("profiles")
@@ -20,7 +24,7 @@ async function resolveRoleAndRedirect(userId: string, router: ReturnType<typeof 
     .eq("id", userId)
     .single();
 
-  const role = profile?.role as ProfileRole | undefined;
+  const role = (profile?.role as ProfileRole | undefined) ?? fallbackRole;
 
   if (role === "student") {
     router.replace("/student");
@@ -30,7 +34,7 @@ async function resolveRoleAndRedirect(userId: string, router: ReturnType<typeof 
   router.replace("/dashboard");
 }
 
-export default function LoginPage() {
+function LoginPageContent() {
   usePageTitle("Sign in - Vigilo");
 
   const router = useRouter();
@@ -69,7 +73,8 @@ export default function LoginPage() {
         } = await supabase.auth.getSession();
 
         if (active && session?.user) {
-          await resolveRoleAndRedirect(session.user.id, router);
+          const metadataRole = session.user.user_metadata?.role as ProfileRole | undefined;
+          await resolveRoleAndRedirect(session.user.id, router, metadataRole);
         }
       } catch {
         if (active) {
@@ -113,7 +118,8 @@ export default function LoginPage() {
         return;
       }
 
-      await resolveRoleAndRedirect(data.user.id, router);
+      const metadataRole = data.user.user_metadata?.role as ProfileRole | undefined;
+      await resolveRoleAndRedirect(data.user.id, router, metadataRole);
     } catch {
       setErrorMessage(INVALID_CREDENTIALS_MESSAGE);
     } finally {
@@ -285,5 +291,15 @@ export default function LoginPage() {
         </div>
       </main>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense
+      fallback={<div className="min-h-screen bg-[var(--paper)] text-[var(--ink)]" />}
+    >
+      <LoginPageContent />
+    </Suspense>
   );
 }

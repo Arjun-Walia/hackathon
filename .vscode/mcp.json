@@ -2,19 +2,32 @@
   "servers": {
     "ui-magic": {
       "command": "npx",
-      "args": ["-y", "@magicuidesign/mcp@latest"]
+      "args": [
+        "-y",
+        "@magicuidesign/mcp@latest"
+      ]
     },
     "shadcn": {
       "command": "npx",
-      "args": ["-y", "shadcn@latest", "mcp"]
+      "args": [
+        "-y",
+        "shadcn@latest",
+        "mcp"
+      ]
     },
     "prisma": {
       "command": "npx",
-      "args": ["-y", "prisma-mcp@latest"]
+      "args": [
+        "-y",
+        "prisma-mcp@latest"
+      ]
     },
     "auth": {
       "command": "npx",
-      "args": ["-y", "lucia-auth-mcp@latest"]
+      "args": [
+        "-y",
+        "lucia-auth-mcp@latest"
+      ]
     },
     "supabase": {
       "type": "http",
@@ -23,6 +36,13 @@
     "Sanity": {
       "type": "http",
       "url": "https://mcp.sanity.io"
+    },
+    "railway": {
+      "type": "http",
+      "url": "https://mcp.railway.app"
+    },
+    "vercel": {
+      "url": "https://mcp.vercel.com"
     }
   }
 }

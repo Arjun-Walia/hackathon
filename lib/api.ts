@@ -36,7 +36,19 @@ function buildQueryString(params?: QueryParams): string {
 }
 
 function getBaseUrl(): string {
-  const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+  // In the browser, use a relative URL so requests go to the same origin.
+  // Next.js rewrites /api/v1/* → /api/proxy/v1/* which proxies to Railway
+  // server-side, avoiding CORS entirely.
+  if (typeof window !== "undefined") {
+    return "";
+  }
+
+  // On the server (e.g. server actions), fall back to the explicit backend URL.
+  const baseUrl =
+    process.env.VIGILO_BACKEND_URL ||
+    process.env.NEXT_PUBLIC_VIGILO_BACKEND_URL ||
+    process.env.NEXT_PUBLIC_API_URL;
+
   if (!baseUrl) {
     throw {
       message: "Missing NEXT_PUBLIC_API_URL",

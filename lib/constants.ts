@@ -1,3 +1,5 @@
+import type { ProfileBuilderFormValues, ProfileSection } from "@/types";
+
 export const BRAND_NAME = "Vigilo";
 export const BRAND_INITIAL = "V";
 export const REFERENCE_DATE = "2026-04-09T09:00:00+05:30";
@@ -1775,4 +1777,794 @@ export const HELP_CENTER = {
       body: "Risk scores update every morning at 6:00 AM after LMS, attendance, and mock data sync completes.",
     },
   ],
+};
+
+export const STUDENT_PAGE_META = [
+  {
+    href: "/student/dashboard",
+    title: "Student Overview",
+    description: "Track readiness, risks, and your next best actions.",
+  },
+  {
+    href: "/student/progress",
+    title: "Progress Insights",
+    description: "Placement probability trends and weekly activity.",
+  },
+  {
+    href: "/student/action-plan",
+    title: "AI Action Plan",
+    description: "Prioritized tasks to improve your placement score.",
+  },
+  {
+    href: "/student/profile-builder",
+    title: "Profile Builder",
+    description: "Complete your profile to improve recruiter visibility.",
+  },
+  {
+    href: "/student/skill-tracker",
+    title: "Skill Tracker",
+    description: "Skill-by-skill diagnostics with improvement guidance.",
+  },
+  {
+    href: "/student/mock-interviews",
+    title: "Mock Interviews",
+    description: "Book and review interview practice sessions.",
+  },
+  {
+    href: "/student/achievements",
+    title: "Achievements",
+    description: "Badges, leaderboard, and certification highlights.",
+  },
+  {
+    href: "/student/notifications",
+    title: "Notifications",
+    description: "TPC alerts, reminders, and AI nudges.",
+  },
+];
+
+export const STUDENT_NAV_SECTIONS = [
+  {
+    title: "OVERVIEW",
+    items: [
+      { label: "Dashboard", href: "/student/dashboard", icon: "LayoutDashboard" },
+      { label: "Progress", href: "/student/progress", icon: "TrendingUp" },
+      { label: "Action Plan", href: "/student/action-plan", icon: "Zap" },
+    ],
+  },
+  {
+    title: "PROFILE",
+    items: [
+      {
+        label: "Profile Builder",
+        href: "/student/profile-builder",
+        icon: "UserCircle",
+        badgeCount: 78,
+        badgeTone: "amber",
+      },
+      { label: "Skill Tracker", href: "/student/skill-tracker", icon: "Brain" },
+      { label: "Mock Interviews", href: "/student/mock-interviews", icon: "Mic" },
+    ],
+  },
+  {
+    title: "ENGAGEMENT",
+    items: [
+      { label: "Achievements", href: "/student/achievements", icon: "Trophy" },
+      {
+        label: "Notifications",
+        href: "/student/notifications",
+        icon: "Bell",
+        badgeCount: 4,
+        badgeTone: "rose",
+      },
+    ],
+  },
+];
+
+export const STUDENT_PROFILE = {
+  id: "stu-022",
+  name: "Meera Krishnan",
+  rollNo: "23CSE102",
+  department: "CSE",
+  year: 4,
+  cgpa: 8.3,
+  placementProbability: 72,
+  riskScore: 58,
+  cluster: "ready",
+  streak: 12,
+  profileCompletion: 78,
+  batchYear: "2026",
+  lastUpdated: "2026-04-09T09:00:00+05:30",
+  weeklyProgress: [
+    { week: "W1", probability: 61, dsa: 52, aptitude: 60, mock: 48 },
+    { week: "W2", probability: 63, dsa: 55, aptitude: 62, mock: 52 },
+    { week: "W3", probability: 65, dsa: 58, aptitude: 63, mock: 57 },
+    { week: "W4", probability: 66, dsa: 60, aptitude: 64, mock: 60 },
+    { week: "W5", probability: 68, dsa: 62, aptitude: 66, mock: 63 },
+    { week: "W6", probability: 70, dsa: 66, aptitude: 68, mock: 66 },
+    { week: "W7", probability: 71, dsa: 68, aptitude: 69, mock: 68 },
+    { week: "W8", probability: 72, dsa: 70, aptitude: 71, mock: 70 },
+  ],
+  monthlyProgress: [
+    { month: "Jan", probability: 58, tasksCompleted: 26 },
+    { month: "Feb", probability: 63, tasksCompleted: 35 },
+    { month: "Mar", probability: 68, tasksCompleted: 43 },
+    { month: "Apr", probability: 72, tasksCompleted: 51 },
+  ],
+  skills: {
+    dsa: 70,
+    aptitude: 71,
+    communication: 76,
+    domainKnowledge: 73,
+    resumeQuality: 82,
+    mockInterviewScore: 69,
+  },
+  batchAvgSkills: {
+    dsa: 62,
+    aptitude: 65,
+    communication: 70,
+    domainKnowledge: 67,
+    resumeQuality: 75,
+    mockInterviewScore: 63,
+  },
+  activityHeatmap: Array.from({ length: 56 }, (_, index) => ({
+    date: `2026-03-${String((index % 28) + 1).padStart(2, "0")}`,
+    count: index % 7 === 0 ? 0 : (index % 5) + 1,
+  })),
+};
+
+export const STUDENT_PROFILE_COMPLETION_CARD = {
+  completion: 78,
+  attentionText: "Add 2 missing sections for recruiter-ready profile",
+  actionLabel: "Complete Now",
+};
+
+export const STUDENT_AI_INSIGHT_SHEET = {
+  headline: "You can cross 75% readiness this month",
+  summary:
+    "Your recent consistency is strong. The biggest gain now comes from mock interview depth and DSA mediums.",
+  bullets: [
+    "Book one problem-solving mock by Friday to unlock the highest short-term probability gain.",
+    "Finish 12 medium DSA problems from Graphs and DP in the next 7 days.",
+    "Your resume is strong; focus effort on communication and structured storytelling.",
+  ],
+};
+
+export const STUDENT_PROGRESS_RANGES = [
+  "This Week",
+  "This Month",
+  "Last 3 Months",
+  "Last 6 Months",
+];
+
+export const STUDENT_SKILL_CARDS = [
+  {
+    id: "dsa",
+    label: "DSA",
+    icon: "Code2",
+    currentScore: 70,
+    trend: [52, 55, 58, 60, 62, 66, 68, 70],
+    delta: 8,
+    batchAverage: 62,
+    percentile: 42,
+    diagnosis: "Steady rise in mediums; graphs and DP still need focused reps.",
+    actionLabel: "Practice DSA",
+  },
+  {
+    id: "aptitude",
+    label: "Aptitude",
+    icon: "Cpu",
+    currentScore: 71,
+    trend: [60, 61, 62, 64, 66, 68, 70, 71],
+    delta: 5,
+    batchAverage: 65,
+    percentile: 46,
+    diagnosis: "Speed is improving; maintain daily timed sets for consistency.",
+    actionLabel: "Take Timed Test",
+  },
+  {
+    id: "communication",
+    label: "Communication",
+    icon: "MessageSquare",
+    currentScore: 76,
+    trend: [65, 66, 68, 70, 71, 73, 75, 76],
+    delta: 4,
+    batchAverage: 70,
+    percentile: 39,
+    diagnosis: "Clear progress in structure and confidence during mock answers.",
+    actionLabel: "Practice Pitch",
+  },
+  {
+    id: "domainKnowledge",
+    label: "Domain Knowledge",
+    icon: "BookOpen",
+    currentScore: 73,
+    trend: [61, 63, 65, 66, 68, 70, 72, 73],
+    delta: 5,
+    batchAverage: 67,
+    percentile: 44,
+    diagnosis: "Core concepts are solid; revise advanced edge-case patterns.",
+    actionLabel: "Revise Notes",
+  },
+  {
+    id: "resumeQuality",
+    label: "Resume Quality",
+    icon: "FileCheck",
+    currentScore: 82,
+    trend: [70, 72, 74, 76, 78, 79, 81, 82],
+    delta: 3,
+    batchAverage: 75,
+    percentile: 31,
+    diagnosis: "Strong ATS alignment and measurable project bullets.",
+    actionLabel: "Preview Resume",
+  },
+  {
+    id: "mockInterviewScore",
+    label: "Mock Interview Score",
+    icon: "Mic",
+    currentScore: 69,
+    trend: [51, 54, 56, 59, 61, 64, 67, 69],
+    delta: 6,
+    batchAverage: 63,
+    percentile: 48,
+    diagnosis: "Improve follow-up handling and concise trade-off explanations.",
+    actionLabel: "Book Mock",
+  },
+];
+
+export const STUDENT_STREAK_INSIGHT =
+  "You are 2 active days away from matching your longest streak. Continuing this cadence typically lifts placement readiness by 3-5 points over two weeks.";
+
+export const STUDENT_ACTIVITY_BREAKDOWN_CURRENT = [
+  { day: "Mon", leetCode: 2, mockTests: 1, courses: 1, profileUpdates: 0 },
+  { day: "Tue", leetCode: 3, mockTests: 1, courses: 1, profileUpdates: 1 },
+  { day: "Wed", leetCode: 2, mockTests: 0, courses: 2, profileUpdates: 1 },
+  { day: "Thu", leetCode: 4, mockTests: 1, courses: 1, profileUpdates: 0 },
+  { day: "Fri", leetCode: 3, mockTests: 1, courses: 1, profileUpdates: 1 },
+  { day: "Sat", leetCode: 5, mockTests: 1, courses: 0, profileUpdates: 0 },
+  { day: "Sun", leetCode: 2, mockTests: 0, courses: 1, profileUpdates: 0 },
+];
+
+export const STUDENT_ACTIVITY_BREAKDOWN_PREVIOUS = [
+  { day: "Mon", leetCode: 1, mockTests: 0, courses: 1, profileUpdates: 0 },
+  { day: "Tue", leetCode: 2, mockTests: 1, courses: 0, profileUpdates: 0 },
+  { day: "Wed", leetCode: 2, mockTests: 0, courses: 1, profileUpdates: 0 },
+  { day: "Thu", leetCode: 3, mockTests: 0, courses: 1, profileUpdates: 0 },
+  { day: "Fri", leetCode: 2, mockTests: 1, courses: 0, profileUpdates: 1 },
+  { day: "Sat", leetCode: 3, mockTests: 0, courses: 1, profileUpdates: 0 },
+  { day: "Sun", leetCode: 1, mockTests: 0, courses: 0, profileUpdates: 0 },
+];
+
+export const STUDENT_MONTHLY_SUMMARY = [
+  { label: "Problems Solved", value: "184", delta: "+27", tone: "violet" },
+  { label: "Mocks Completed", value: "6", delta: "+2", tone: "amber" },
+  { label: "Courses Finished", value: "4", delta: "+1", tone: "blue" },
+  { label: "Profile Updates", value: "11", delta: "+3", tone: "emerald" },
+];
+
+export const STUDENT_COHORT_COMPARISON = [
+  { skill: "DSA", yourScore: 70, batchAverage: 62, percentile: 42 },
+  { skill: "Aptitude", yourScore: 71, batchAverage: 65, percentile: 46 },
+  { skill: "Communication", yourScore: 76, batchAverage: 70, percentile: 39 },
+  { skill: "Domain Knowledge", yourScore: 73, batchAverage: 67, percentile: 44 },
+  { skill: "Resume Quality", yourScore: 82, batchAverage: 75, percentile: 31 },
+  { skill: "Mock Interview", yourScore: 69, batchAverage: 63, percentile: 48 },
+];
+
+export const STUDENT_DSA_TOPIC_BREAKDOWN = [
+  { topic: "Arrays", solved: 34, accuracy: "86%", status: "Strong", tone: "emerald" },
+  { topic: "Strings", solved: 26, accuracy: "81%", status: "Strong", tone: "emerald" },
+  { topic: "Trees", solved: 22, accuracy: "69%", status: "Improving", tone: "amber" },
+  { topic: "Graphs", solved: 14, accuracy: "56%", status: "Needs Focus", tone: "rose" },
+  { topic: "Dynamic Programming", solved: 11, accuracy: "49%", status: "Needs Focus", tone: "rose" },
+];
+
+export const STUDENT_RECOMMENDED_PROBLEMS = [
+  "200. Number of Islands",
+  "743. Network Delay Time",
+  "300. Longest Increasing Subsequence",
+  "322. Coin Change",
+  "146. LRU Cache",
+];
+
+export const STUDENT_IMPROVEMENT_PLAN = [
+  { id: "imp-1", week: "Week 1", task: "Finish graph traversals and 15 BFS/DFS questions.", completed: true },
+  { id: "imp-2", week: "Week 2", task: "Practice 10 DP patterns and revise recursion templates.", completed: false },
+  { id: "imp-3", week: "Week 3", task: "Take two full mock rounds with timed explanations.", completed: false },
+  { id: "imp-4", week: "Week 4", task: "Polish resume storytelling and behavioral answers.", completed: false },
+];
+
+export const STUDENT_MOCK_STATS = [
+  { label: "Mocks Taken", value: "6", delta: "+2 this month", tone: "violet" },
+  { label: "Average Score", value: "69/100", delta: "+6 pts", tone: "emerald" },
+  { label: "Best Score", value: "81/100", delta: "Technical Round", tone: "amber" },
+  { label: "Pending Reviews", value: "1", delta: "Awaiting feedback", tone: "violet" },
+];
+
+export const STUDENT_UPCOMING_MOCK = {
+  dateLabel: "Fri, 12 Apr · 4:30 PM",
+  type: "Problem Solving + Resume Deep Dive",
+  interviewer: "Priya Nair (SDE-II)",
+  countdown: "01d : 05h",
+};
+
+export const STUDENT_MOCK_ATTEMPTS = [
+  {
+    id: "mock-1",
+    date: "02 Apr 2026",
+    type: "Technical Round",
+    score: 64,
+    feedbackSummary: "Good fundamentals; needs sharper trade-off articulation.",
+    strengths: ["Array patterns", "Code readability"],
+    improvements: ["Complexity analysis", "Edge-case probing"],
+    scoreBreakdown: [
+      { label: "Problem Solving", value: 66 },
+      { label: "Communication", value: 61 },
+      { label: "System Thinking", value: 58 },
+      { label: "Confidence", value: 69 },
+    ],
+    questionReview: [
+      "Solved two medium problems with clean structure.",
+      "Missed optimization in sliding window follow-up.",
+    ],
+    aiTips: [
+      "Narrate brute-force first, then optimize step-by-step.",
+      "Summarize constraints before coding to reduce rework.",
+    ],
+  },
+  {
+    id: "mock-2",
+    date: "06 Apr 2026",
+    type: "HR + Behavioral",
+    score: 72,
+    feedbackSummary: "Clear structure with stronger confidence and examples.",
+    strengths: ["STAR framing", "Calm delivery"],
+    improvements: ["Quantify outcomes", "Shorten introductions"],
+    scoreBreakdown: [
+      { label: "Clarity", value: 75 },
+      { label: "Confidence", value: 74 },
+      { label: "Relevance", value: 69 },
+      { label: "Structure", value: 70 },
+    ],
+    questionReview: [
+      "Strong ownership examples for conflict resolution.",
+      "Need more measurable impact in final answer.",
+    ],
+    aiTips: [
+      "Keep each answer under 90 seconds when possible.",
+      "Anchor examples with one concrete metric.",
+    ],
+  },
+];
+
+export const STUDENT_BOOK_MOCK_OPTIONS = {
+  types: [
+    "Technical Round",
+    "Problem Solving",
+    "HR + Behavioral",
+    "Resume Deep Dive",
+  ],
+  slots: [
+    "Tue 11:00 AM",
+    "Wed 3:30 PM",
+    "Fri 4:30 PM",
+    "Sat 10:00 AM",
+  ],
+};
+
+export const STUDENT_ACTION_PLAN_HEADER = {
+  generatedOn: "Generated on 09 Apr 2026 · 08:20 AM",
+  riskLabel: "Medium Risk",
+  projection: "Following this plan can improve your placement probability by +11 points in 4 weeks.",
+};
+
+export const STUDENT_ACTION_PLAN_PROJECTION = [
+  { week: "W-2", current: 63, plan: 63 },
+  { week: "W-1", current: 66, plan: 66 },
+  { week: "Today", current: 72, plan: 72 },
+  { week: "W+1", current: 72, plan: 75 },
+  { week: "W+2", current: 71, plan: 78 },
+  { week: "W+3", current: 71, plan: 81 },
+  { week: "W+4", current: 70, plan: 83 },
+];
+
+export const STUDENT_ACTION_PLAN_TASKS = {
+  critical: [
+    {
+      id: "crit-1",
+      title: "Complete Graph + DP sprint",
+      why: "These topics currently drive most misses in coding rounds.",
+      impact: "+4 pts readiness",
+      due: "Due in 5 days",
+      ctaLabel: "Start Sprint",
+      href: "/student/skill-tracker#dsa",
+      icon: "Code2",
+      progress: 5,
+      total: 15,
+    },
+  ],
+  high: [
+    {
+      id: "high-1",
+      title: "Book and finish one problem-solving mock",
+      why: "Live pressure simulation improves conversion in final rounds.",
+      impact: "+3 pts readiness",
+      due: "Due this week",
+      ctaLabel: "Book Mock",
+      href: "/student/mock-interviews",
+      icon: "Mic",
+      progress: 0,
+      total: 1,
+    },
+  ],
+  medium: [
+    {
+      id: "med-1",
+      title: "Refine 3 project stories on resume",
+      why: "Sharper storytelling raises recruiter confidence.",
+      impact: "+2 pts readiness",
+      due: "Due in 10 days",
+      ctaLabel: "Update Resume",
+      href: "/student/profile-builder",
+      icon: "FileText",
+      progress: 1,
+      total: 3,
+    },
+  ],
+};
+
+export const STUDENT_WEEKLY_CHECKLIST = [
+  { id: "wk-1", label: "Solve 20 DSA medium problems", completed: true },
+  { id: "wk-2", label: "Complete 2 aptitude timed tests", completed: true },
+  { id: "wk-3", label: "Attend 1 mock interview", completed: false },
+  { id: "wk-4", label: "Update resume metrics", completed: false },
+  { id: "wk-5", label: "Publish one project demo", completed: true },
+];
+
+export const STUDENT_ACHIEVEMENT_STATS = [
+  { label: "Badges Earned", value: "18", delta: "+2 this month", tone: "amber" },
+  { label: "Leaderboard Rank", value: "#27", delta: "Top 10%", tone: "violet" },
+  { label: "Certifications", value: "7", delta: "+1 recent", tone: "emerald" },
+  { label: "Milestones", value: "12", delta: "On track", tone: "blue" },
+];
+
+export const STUDENT_BADGES = [
+  {
+    id: "badge-1",
+    name: "Consistency Pro",
+    description: "Active for 10 consecutive days.",
+    icon: "Flame",
+    tone: "amber",
+    earned: true,
+    earnedDate: "Earned 08 Apr 2026",
+  },
+  {
+    id: "badge-2",
+    name: "Mock Warrior",
+    description: "Completed 5+ mock interviews.",
+    icon: "Mic",
+    tone: "violet",
+    earned: true,
+    earnedDate: "Earned 02 Apr 2026",
+  },
+  {
+    id: "badge-3",
+    name: "Resume Ready",
+    description: "Achieved ATS score above 80.",
+    icon: "FileCheck",
+    tone: "emerald",
+    earned: true,
+    earnedDate: "Earned 29 Mar 2026",
+  },
+  {
+    id: "badge-4",
+    name: "Top Coder",
+    description: "Solve 250 coding problems.",
+    icon: "Code",
+    tone: "yellow",
+    earned: false,
+    unlockCriteria: "Solve 66 more problems",
+  },
+];
+
+export const STUDENT_LEADERBOARD = [
+  { rank: 21, name: "ID-9F2A", placementProbability: 84, score: 912, mockCount: 9 },
+  { rank: 24, name: "ID-0D7K", placementProbability: 81, score: 904, mockCount: 8 },
+  { rank: 27, name: "You (ID-2M3Q)", placementProbability: 72, score: 861, mockCount: 6, isCurrentStudent: true },
+  { rank: 30, name: "ID-5R1Z", placementProbability: 70, score: 850, mockCount: 6 },
+  { rank: 32, name: "ID-4H8T", placementProbability: 69, score: 845, mockCount: 5 },
+];
+
+export const STUDENT_CERTIFICATIONS = [
+  {
+    id: "cert-1",
+    name: "AWS Cloud Practitioner",
+    organization: "Amazon Web Services",
+    issueDate: "Issued Jan 2026",
+    category: "Cloud",
+    relevance: "relevant",
+  },
+  {
+    id: "cert-2",
+    name: "Data Structures & Algorithms",
+    organization: "Coursera",
+    issueDate: "Issued Mar 2026",
+    category: "DSA",
+    relevance: "relevant",
+  },
+  {
+    id: "cert-3",
+    name: "Prompting for Engineers",
+    organization: "DeepLearning.AI",
+    issueDate: "Issued Apr 2026",
+    category: "AI/ML",
+    relevance: "suggested",
+  },
+];
+
+export const STUDENT_NOTIFICATION_STATS = [
+  { label: "Unread", value: "4", tone: "rose" },
+  { label: "TPC Alerts", value: "2", tone: "amber" },
+  { label: "AI Nudges", value: "5", tone: "violet" },
+  { label: "System", value: "3", tone: "slate" },
+];
+
+export const STUDENT_NOTIFICATION_FILTERS = [
+  "All",
+  "TPC Alerts",
+  "AI Nudges",
+  "Reminders",
+  "System",
+];
+
+export const STUDENT_NOTIFICATIONS = [
+  {
+    id: "note-1",
+    type: "tpc",
+    title: "Resume review slot assigned",
+    description: "Your resume review is scheduled for Thursday 3:00 PM with the TPC panel.",
+    timestamp: "12 mins ago",
+    unread: true,
+    actionLabel: "View Slot",
+  },
+  {
+    id: "note-2",
+    type: "ai",
+    title: "AI nudge: focus on Graphs",
+    description: "You are within +3 points of threshold. Graph practice can unlock the jump.",
+    timestamp: "1 hour ago",
+    unread: true,
+    actionLabel: "Open Plan",
+  },
+  {
+    id: "note-3",
+    type: "reminder",
+    title: "Mock interview tomorrow",
+    description: "Prepare your project walkthrough and two STAR behavioral examples.",
+    timestamp: "3 hours ago",
+    unread: true,
+    actionLabel: "View Checklist",
+  },
+  {
+    id: "note-4",
+    type: "achievement",
+    title: "New badge unlocked",
+    description: "You earned the Consistency Pro badge for maintaining a 10-day streak.",
+    timestamp: "Yesterday",
+    unread: false,
+  },
+  {
+    id: "note-5",
+    type: "system",
+    title: "Profile sync completed",
+    description: "Your profile has been synced with recruiter-facing view.",
+    timestamp: "2 days ago",
+    unread: false,
+  },
+];
+
+export const PROFILE_SECTION_ORDER: ProfileSection[] = [
+  "basic",
+  "academic",
+  "resume",
+  "links",
+  "contests",
+  "certifications",
+  "projects",
+  "experience",
+  "skills",
+  "preferences",
+  "additional",
+];
+
+export const PROFILE_SECTION_META = [
+  {
+    id: "basic",
+    title: "Basic Info",
+    completion: 92,
+    status: "partial",
+    aiTip: "Add a professional photo and verify phone number.",
+  },
+  {
+    id: "academic",
+    title: "Academic Details",
+    completion: 100,
+    status: "complete",
+    aiTip: "Academic profile is strong for most product roles.",
+  },
+  { id: "resume", title: "Resume", completion: 82, status: "partial", aiTip: "Quantify outcomes in two project bullets." },
+  { id: "links", title: "Public Links", completion: 76, status: "partial", aiTip: "Add one portfolio/demo link for credibility." },
+  { id: "contests", title: "Contest Ratings", completion: 68, status: "partial", aiTip: "Include your latest contest rank for recency." },
+  { id: "certifications", title: "Certifications", completion: 84, status: "partial", aiTip: "Mark relevance to target role for better matching." },
+  { id: "projects", title: "Projects", completion: 79, status: "partial", aiTip: "Add one team project with deployment metrics." },
+  { id: "experience", title: "Experience", completion: 64, status: "partial", aiTip: "Highlight measurable outcomes from internship work." },
+  { id: "skills", title: "Skills", completion: 88, status: "partial", aiTip: "Raise self-ratings only when backed by project evidence." },
+  { id: "preferences", title: "Preferences", completion: 95, status: "complete", aiTip: "Preferences are aligned with your current trajectory." },
+  { id: "additional", title: "Additional", completion: 71, status: "partial", aiTip: "Complete parent contact and language details." },
+];
+
+export const STUDENT_PROFILE_OPTIONS = {
+  departments: ["CSE", "IT", "ECE", "MECH", "CIVIL", "MBA"],
+  years: ["1st", "2nd", "3rd", "4th"],
+  genders: ["Male", "Female", "Other", "Prefer not to say"],
+  contestPlatforms: ["LeetCode", "Codeforces", "CodeChef", "HackerRank", "AtCoder"],
+  certificateCategories: ["Cloud", "DSA", "Web Dev", "AI/ML", "Database", "Soft Skills", "Other"],
+  projectTypes: ["Academic", "Personal", "Open Source", "Freelance", "Internship"],
+  employmentTypes: ["Internship", "Part-time", "Full-time", "Contract"],
+  targetRoles: ["SDE", "Data Analyst", "Backend Engineer", "Frontend Engineer", "QA Engineer", "Product Analyst"],
+  preferredDomains: ["Product", "FinTech", "SaaS", "AI/ML", "Core Engineering", "Consulting"],
+  preferredLocations: ["Bangalore", "Hyderabad", "Pune", "Chennai", "Mumbai", "Remote"],
+  noticePeriods: ["Immediate", "15 days", "30 days", "60 days"],
+  workModes: ["In-Office", "Hybrid", "Remote", "No Preference"],
+  categories: ["General", "OBC", "SC", "ST", "EWS"],
+};
+
+export const STUDENT_PROFILE_FORM_DEFAULTS: ProfileBuilderFormValues = {
+  basic: {
+    fullName: STUDENT_PROFILE.name,
+    rollNumber: STUDENT_PROFILE.rollNo,
+    department: "CSE",
+    yearOfStudy: "4th",
+    expectedGraduation: "2026",
+    dateOfBirth: "2004-02-18",
+    phoneNumber: "+91 9876543210",
+    gender: "Female",
+    profilePhotoUrl: "",
+  },
+  academic: {
+    cgpa: 8.3,
+    tenthPercentage: 92.4,
+    twelfthPercentage: 89.1,
+    activeBacklogs: 0,
+    historicalBacklogs: 0,
+    specialization: "Artificial Intelligence",
+    collegeName: "Vigilo Institute of Technology",
+    university: "VTU",
+  },
+  resume: {
+    resumeLink: "",
+    atsScore: 82,
+    lastUpdated: "2026-04-08",
+    checklist: [
+      { id: "resume-check-1", label: "Include quantified achievements", completed: true },
+      { id: "resume-check-2", label: "Add GitHub and deployed project links", completed: true },
+      { id: "resume-check-3", label: "Keep resume to one page", completed: false },
+      { id: "resume-check-4", label: "Tailor summary for target role", completed: false },
+    ],
+  },
+  links: [
+    {
+      id: "link-1",
+      platform: "GitHub",
+      icon: "Github",
+      tone: "sky",
+      url: "",
+      visibility: "public",
+      verified: true,
+    },
+    {
+      id: "link-2",
+      platform: "LinkedIn",
+      icon: "Linkedin",
+      tone: "violet",
+      url: "",
+      visibility: "public",
+      verified: true,
+    },
+  ],
+  contests: [
+    {
+      id: "contest-1",
+      platform: "LeetCode",
+      rating: 1735,
+      rank: "Knight",
+      percentile: 88,
+      contestName: "Weekly Contest 395",
+      date: "2026-04-06",
+    },
+  ],
+  certifications: [
+    {
+      id: "cert-default-1",
+      name: "AWS Cloud Practitioner",
+      organization: "Amazon Web Services",
+      issueDate: "2026-01-11",
+      expiryDate: "",
+      noExpiry: true,
+      credentialId: "",
+      url: "",
+      category: "Cloud",
+      relevance: "relevant",
+    },
+  ],
+  projects: [
+    {
+      id: "proj-1",
+      title: "Placement Tracker",
+      description: "Built a predictive placement dashboard with role-fit analytics and action nudges.",
+      techStack: ["Next.js", "TypeScript", "Supabase"],
+      demoUrl: "",
+      githubUrl: "",
+      type: "Personal",
+      startDate: "2025-11",
+      endDate: "2026-02",
+      ongoing: false,
+      teamSize: 2,
+      achievement: "Improved mock completion by 18% in pilot.",
+    },
+  ],
+  experience: [
+    {
+      id: "exp-1",
+      companyName: "Innova Labs",
+      role: "Software Engineer Intern",
+      employmentType: "Internship",
+      startDate: "2025-06",
+      endDate: "2025-08",
+      present: false,
+      location: "Bangalore",
+      remote: true,
+      description: "Worked on analytics widgets and API integration for recruiter dashboards.",
+      stipend: 30000,
+      offerLetterUrl: "",
+      skillsUsed: ["React", "TypeScript", "SQL"],
+    },
+  ],
+  skills: {
+    technical: [
+      { id: "tech-1", name: "TypeScript", selfRating: 4, aiRating: 3.8 },
+      { id: "tech-2", name: "DSA", selfRating: 4, aiRating: 3.5 },
+      { id: "tech-3", name: "React", selfRating: 4, aiRating: 3.7 },
+    ],
+    soft: [
+      { id: "soft-1", label: "Communication", level: "yes" },
+      { id: "soft-2", label: "Leadership", level: "developing" },
+      { id: "soft-3", label: "Teamwork", level: "yes" },
+      { id: "soft-4", label: "Problem Solving", level: "yes" },
+      { id: "soft-5", label: "Time Management", level: "developing" },
+      { id: "soft-6", label: "Presentation Skills", level: "developing" },
+      { id: "soft-7", label: "Critical Thinking", level: "yes" },
+    ],
+  },
+  preferences: {
+    targetRoles: ["SDE", "Backend Engineer"],
+    preferredDomains: ["Product", "AI/ML"],
+    preferredLocations: ["Bangalore", "Hyderabad"],
+    ctcRange: [8, 16],
+    openToRelocation: true,
+    noticePeriod: "Immediate",
+    workModePreference: "Hybrid",
+    aiMatchScore: 84,
+  },
+  additional: {
+    fatherName: "Ravi Krishnan",
+    motherName: "Lakshmi Krishnan",
+    parentContactNumber: "+91 9988776655",
+    permanentAddress: "Bengaluru, Karnataka",
+    category: "General",
+    differentlyAbled: false,
+    differentlyAbledDetails: "",
+    passportAvailable: true,
+    languages: ["English", "Hindi", "Kannada"],
+    hobbies: ["Chess", "Running", "Reading"],
+  },
 };

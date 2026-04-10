@@ -21,6 +21,17 @@ function getServerSupabaseConfig() {
   return { supabaseUrl, serviceRoleKey };
 }
 
+function getPublicSupabaseConfig() {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+  if (!supabaseUrl || !supabaseAnonKey) {
+    return null;
+  }
+
+  return { supabaseUrl, supabaseAnonKey };
+}
+
 export async function POST(request: Request) {
   const body = (await request.json().catch(() => ({}))) as RegisterRequest;
 
@@ -42,11 +53,60 @@ export async function POST(request: Request) {
   }
 
   const serverConfig = getServerSupabaseConfig();
+  const publicConfig = getPublicSupabaseConfig();
+
+  if (!serverConfig && !publicConfig) {
+    return NextResponse.json(
+      {
+        error:
+          "Registration is not configured. Add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY to .env.local and restart Next.js.",
+      },
+      { status: 500 },
+    );
+  }
+
+  if (!serverConfig && publicConfig) {
+    const publicClient = createClient(publicConfig.supabaseUrl, publicConfig.supabaseAnonKey, {
+      auth: {
+        autoRefreshToken: false,
+        persistSession: false,
+      },
+    });
+
+    const { data, error } = await publicClient.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          full_name: fullName,
+          role,
+        },
+      },
+    });
+
+    if (error) {
+      const lower = error.message.toLowerCase();
+      const status = lower.includes("already") || lower.includes("registered") ? 409 : 400;
+      return NextResponse.json({ error: error.message }, { status });
+    }
+
+    return NextResponse.json(
+      {
+        ok: true,
+        message:
+          data.user?.identities && data.user.identities.length === 0
+            ? "An account with this email already exists. Please sign in."
+            : "Account created. You can sign in now.",
+      },
+      { status: 201 },
+    );
+  }
+
   if (!serverConfig) {
     return NextResponse.json(
       {
         error:
-          "Server registration is not configured. Add SUPABASE_URL and SUPABASE_KEY (or SUPABASE_SERVICE_ROLE_KEY) to .env.local and restart Next.js.",
+          "Registration is not configured. Add SUPABASE_URL and SUPABASE_KEY (or SUPABASE_SERVICE_ROLE_KEY) to .env.local and restart Next.js.",
       },
       { status: 500 },
     );

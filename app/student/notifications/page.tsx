@@ -78,7 +78,7 @@ export default function NotificationsPage() {
 
       <div className="space-y-4">
         {filteredItems.map((item) => {
-          const config = typeToneMap[item.type];
+          const config = typeToneMap[item.type as keyof typeof typeToneMap];
 
           return (
             <Card key={item.id}>
